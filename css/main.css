@@ -1,0 +1,124 @@
+/* Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* Reset CSS */
+* {
+    padding:0;
+    margin:0;
+    vertical-align:baseline;
+    list-style:none;
+    border:0
+}
+
+/* Cores */
+:root {
+    --branco: #fff;
+    --verde: #0D560F;
+    --preto: #000;
+    --cinza: #606060;
+    --rosa: #F27979;
+    --azul-claro: #79F2EB;
+    --laranja: #F2C279;
+    --amarelo: #FFC804;
+    --cinza-claro: #E5E5E5;
+}
+
+html {
+    background: var(--cinza-claro);
+}
+
+body {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1184px;
+    margin: 0 auto;
+}
+
+/* Cabeçalho */
+.cabecalho {
+    background-image: url(/img/header-site-da-horta.jpg);
+    background-size: cover;
+    height: 300px;
+}
+
+
+
+/* Conteúdo */
+#como-funciona {
+    padding: 64px 20px 94px;
+    background-color: var(--branco);
+}
+
+h2 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 56px;
+    color: var(--verde);
+    margin-bottom: 16px;
+}
+
+p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--preto);
+}
+
+.painel {
+    display: flex;
+    margin-top: 102px;
+}
+
+.painel .col-1 {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+}
+
+.painel .col-2 {
+    width: 85%;
+}
+
+.box-painel {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    box-shadow: 1px 3px 9px rgba(0, 0, 0, 0.15);
+    border-radius: 46px;
+    height: 484px;
+}
+
+
+/* Rodapé */
+footer {
+    background-color: var(--verde);
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.credito {
+    text-align: center;
+    align-self: center;
+}
+
+.credito p {
+    color: #fff;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 28px;
+    letter-spacing: 0.05em;
+}
+
+.credito a {
+    color: #fff;
+}
