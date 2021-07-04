@@ -42,7 +42,7 @@ body {
 
 /* Cabeçalho */
 .cabecalho {
-    background-image: url(/img/header-site-da-horta.jpg);
+    background-image: url(/horta/img/header-site-da-horta.jpg);
     background-size: cover;
     background-position: center;
     height: 300px;
@@ -135,25 +135,25 @@ ul.nivel li {
 ul.nivel li .gota {
     width: 23px;
     height: 28px;
-    background-image: url(/img/icone-gota.png);
+    background-image: url(/horta/img/icone-gota.png);
 }
 
 .nivel-umidade .gota.active {
-    background-image: url(/img/icone-gota-rosa.png);
+    background-image: url(/horta/img/icone-gota-rosa.png);
 }
 
 ul.nivel li .luz {
     width: 26px;
     height: 29px;
-    background-image: url(/img/lampada.png);
+    background-image: url(/horta/img/lampada.png);
 }
 
 .nivel-luminosidade .luz.active {
-    background-image: url(/img/lampada-acesa.png);
+    background-image: url(/horta/img/lampada-acesa.png);
 }
 
 .nivel-umidade-ar .gota.active {
-    background-image: url(/img/gota-azul.png);
+    background-image: url(/horta/img/gota-azul.png);
 }
 
 .box-painel h4 {
