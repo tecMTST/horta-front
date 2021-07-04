@@ -245,3 +245,26 @@ footer {
 .credito a {
     color: #fff;
 }
+
+
+/* Media Queries */
+@media (max-width: 590px) {
+    .painel {
+        display: block;
+        height: auto;
+    }
+    .painel .col-1 {
+        width: 100%;
+    }
+    .painel .col-2 {
+        width: 100%;
+    }
+    .container-painel .row .col {
+        width: 100%;
+    }
+    .container-painel .row {
+        width: 100%;
+        display: initial;
+        margin-left: 0;
+    }
+}
