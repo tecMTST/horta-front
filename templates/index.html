@@ -39,15 +39,40 @@
                                 <div class="row">
                                     <div class="col">
                                         <h4>Umidade da terra</h4>
+                                        {{umidade_do_solo}}
                                         <p>Regue novamente</p>
                                         <ul class="nivel nivel-umidade">
-                                            <li><div class="gota active"></div></li>
-                                            <li><div class="gota"></div></li>
-                                            <li><div class="gota"></div></li>
-                                            <li><div class="gota"></div></li>
-                                            <li><div class="gota"></div></li>
+                                            <li><div id="umidade1" class="gota"></div></li>
+                                            <li><div id="umidade2" class="gota"></div></li>
+                                            <li><div id="umidade3" class="gota"></div></li>
+                                            <li><div id="umidade4" class="gota"></div></li>
+                                            <li><div id="umidade5" class="gota"></div></li>
                                         </ul>
                                     </div>
+                                    <script>
+                                        var umidade_do_solo = '{{umidade_do_solo}}';
+                                        if (umidade_do_solo > 20){
+                                            elemento = document.getElementById('umidade1');
+                                            elemento.classList.add('active');
+                                        }
+                                        if (umidade_do_solo > 40){
+                                            elemento = document.getElementById('umidade2');
+                                            elemento.classList.add('active');
+                                        }
+                                        if (umidade_do_solo > 60){
+                                            elemento = document.getElementById('umidade3');
+                                            elemento.classList.add('active');
+                                        }
+                                        if (umidade_do_solo > 80){
+                                            elemento = document.getElementById('umidade4');
+                                            elemento.classList.add('active');
+                                        }
+                                        if (umidade_do_solo > 100){
+                                            elemento = document.getElementById('umidade5');
+                                            elemento.classList.add('active');
+                                        }
+                                    </script>
+                                    </script>
                                     <div class="col">
                                         <h4>Luminosidade</h4>
                                         <p>Claro</p>
@@ -63,9 +88,10 @@
                                 <div class="row">
                                     <div class="col">
                                         <h4>Umidade do ar</h4>
+                                        {{umidade_do_ar}}
                                         <p>Ar seco</p>
                                         <ul class="nivel nivel-umidade-ar">
-                                            <li><div class="gota active"></div></li>
+                                            <li><div class="gota"></div></li>
                                             <li><div class="gota"></div></li>
                                             <li><div class="gota"></div></li>
                                             <li><div class="gota"></div></li>
