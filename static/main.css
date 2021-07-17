@@ -175,15 +175,40 @@ ul.nivel li .luz {
     padding: 4px 0 10px;
 }
 
-.borda-nivel {
+.borda-nivel-ar {
     border: 1px solid rgba(96, 96, 96, 0.24);
     box-sizing: border-box;
     border-radius: 10px;
     height: 20px;
-        background: linear-gradient( 90deg, #79F2EB 4.51%, 
-        rgba(162, 217, 213, 0.447917) 23%, 
-        rgba(196, 196, 196, 0) 36.63%, 
-        rgba(196, 196, 196, 0) 52.47%);
+}
+
+.barra-nivel-ar {
+    width: 98%;
+    height: 18px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: linear-gradient(90deg, #79F2EB 4.51%, 
+    rgba(162, 217, 213, 0.447917) 84%, 
+    rgba(196, 196, 196, 0) 100%, 
+    rgba(196, 196, 196, 0) 84%);
+}
+
+.borda-nivel-ph {
+    border: 1px solid rgba(96, 96, 96, 0.24);
+    box-sizing: border-box;
+    border-radius: 10px;
+    height: 20px;
+}
+
+.barra-nivel-ph {
+    width: 99%;
+    height: 18px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: linear-gradient(90deg, #FFC804 4.51%, 
+    rgba(255, 200, 4, 0.58) 84%, 
+    rgba(196, 196, 196, 0) 100%, 
+    rgba(196, 196, 196, 0) 84%);
 }
 
 .temp .num {
@@ -244,4 +269,27 @@ footer {
 
 .credito a {
     color: #fff;
+}
+
+
+/* Media Queries */
+@media (max-width: 590px) {
+    .painel {
+        display: block;
+        height: auto;
+    }
+    .painel .col-1 {
+        width: 100%;
+    }
+    .painel .col-2 {
+        width: 100%;
+    }
+    .container-painel .row .col {
+        width: 100%;
+    }
+    .container-painel .row {
+        width: 100%;
+        display: initial;
+        margin-left: 0;
+    }
 }
