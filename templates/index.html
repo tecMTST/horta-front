@@ -53,9 +53,9 @@
                                     <script>
                                         var umidade_do_solo = '{{umidade_do_solo}}';
                                         for (var i = 1; i <= 5; i++) {
-                                            var idClass = 'umidade'+i;
+                                            var idElement = 'umidade'+i;
                                             if (umidade_do_solo >= i*20){
-                                                elemento = document.getElementById(idClass);
+                                                elemento = document.getElementById(idElement);
                                                 elemento.classList.add('active');
                                             }
                                         }
