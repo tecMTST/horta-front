@@ -40,7 +40,7 @@
                                     <div class="col">
                                         <h4>Umidade da terra</h4>
                                         <!-- {{umidade_do_solo}} -->
-                                        <p>Regue novamente</p>
+                                        <p id="status-umidade">Regue novamente</p>
                                         <ul class="nivel nivel-umidade">
                                             <li><div id="umidade1" class="gota"></div></li>
                                             <li><div id="umidade2" class="gota"></div></li>
@@ -59,6 +59,9 @@
                                                 elemento.classList.add('active');
                                             }
                                         }
+                                        if (umidade_do_solo >= 40) {
+                                            document.getElementById("status-umidade").innerText = 'Não regar';
+                                        }
                                     </script>
                                    
                                     <div class="col">
@@ -72,28 +75,45 @@
                                             <li><div class="luz"></div></li>
                                         </ul>
                                     </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <h4>Umidade do ar</h4>
-                                        {{umidade_do_ar}}
-                                        <p>Ar seco</p>
+                                        <!-- {{umidade_do_ar}} -->
+                                        <p id="status-umidade-ar">Ar seco</p>
                                         <ul class="nivel nivel-umidade-ar">
-                                            <li><div class="gota"></div></li>
-                                            <li><div class="gota"></div></li>
-                                            <li><div class="gota"></div></li>
-                                            <li><div class="gota"></div></li>
-                                            <li><div class="gota"></div></li>
+                                            <li><div id="umidade-ar1" class="gota"></div></li>
+                                            <li><div id="umidade-ar2" class="gota"></div></li>
+                                            <li><div id="umidade-ar3" class="gota"></div></li>
+                                            <li><div id="umidade-ar4" class="gota"></div></li>
+                                            <li><div id="umidade-ar5" class="gota"></div></li>
                                         </ul>
                                     </div>
+
+                                    <script>
+                                        var umidade_do_ar = 20;
+                                        for (var i = 1; i <= 5; i++) {
+                                            var idElement = 'umidade-ar'+i;
+                                            if (umidade_do_ar >= i*20){
+                                                elemento = document.getElementById(idElement);
+                                                elemento.classList.add('active');
+                                            }
+                                        }
+                                        if (umidade_do_ar >= 50) {
+                                            document.getElementById("status-umidade-ar").innerText = 'Ar úmido';
+                                        }
+                                    </script>
+
                                     <div class="col temp">
                                         <h4>Temperatura do Ar</h4>
-                                        <p class="num">23°</p>
+                                        <p class="num">{{temperatura_do_ar}}°</p>
                                         <div class="borda-nivel-ar">
-                                            <div class="barra-nivel-ar"></div>
+                                            <div class="barra-nivel-ar" style="width:{{perc_temperatura}}%"></div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col nivel-ph">
                                         <h4>Ph</h4>
