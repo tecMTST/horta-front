@@ -10,6 +10,6 @@ def horta():
     u_solo = dados['feeds'][0]['field1']
     t_ar = dados['feeds'][0]['field5']
     u_ar = dados['feeds'][0]['field3']
-    return render_template('/index.html', umidade_do_solo=u_solo, temperatura_do_ar= t_ar, perc_temperatura=float(t_ar)*2, umidade_do_ar=u_ar)
+    return render_template('/index.html', umidade_do_solo=u_solo, temperatura_do_ar= round(float(t_ar)), perc_temperatura=float(t_ar)*2, umidade_do_ar=u_ar)
 
 app.run()
