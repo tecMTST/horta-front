@@ -25,10 +25,10 @@
             <div class="container">
                 <h3>Como funciona?</h3>
                 <p>
-                    A horta comunitária orgânica Dandara, construída no centro do empreendimento Dandara do MTST, é um projeto coletivo do condomínio para o estímulo à alimentação saudável e à construção coletiva. Os militantes que conquistaram suas moradias por meio da luta têm acesso a vegetais da mais alta qualidade que, depois de colhidos, são distribuídos por preços simbólicos para a comunidade local.
+                    <b>A horta comunitária orgânica Dandara</b>, construída no centro do empreendimento Dandara do MTST, é um projeto coletivo do condomínio para o estímulo à alimentação saudável e à construção coletiva. Os militantes que <b>conquistaram suas moradias por meio da luta</b> têm acesso a vegetais da mais alta qualidade que, depois de colhidos, são distribuídos por preços simbólicos para a comunidade local.
                 </p>
                 <p>
-                    Como projeto de conclusão do curso de Introdução à programação do Núcleo de Tecnologia do MTST, os estudantes se responsabilizaram por criar um sistema para automatizar a gestão de saúde da horta. Com componentes de última geração e uma interface web, os moradores do Dandara conseguem medir a temperatura e a umidade do ar, a luminosidade e a umidade do solo e garantir que os vegetais estejam sempre fresquinhos e no melhor estado para consumo.
+                    Como projeto de conclusão do curso de Introdução à programação do <b>Núcleo de Tecnologia do MTST</b>, os estudantes se responsabilizaram por criar um sistema para automatizar a gestão de saúde da horta. Com componentes de última geração e uma interface web, <b>os moradores do Dandara conseguem medir a temperatura e a umidade do ar, a luminosidade e a umidade do solo e garantir que os vegetais estejam sempre fresquinhos e no melhor estado para consumo.</b>
                 </p>
             
                 <div class="painel">
@@ -79,7 +79,7 @@
                                     </div>
 
                                     <script>
-                                        var nivel_luminosidade = 40; /* Trocar pela variável*/
+                                        var nivel_luminosidade = 60; /* Trocar pela variável*/
                                         for (var i = 1; i <= 5; i++) {
                                             var idElement = 'luminosidade'+i;
                                             if (nivel_luminosidade >= i*20){
@@ -87,7 +87,7 @@
                                                 elemento.classList.add('active');
                                             }
                                         }
-                                        if (umidade_do_ar >= 50) {
+                                        if (nivel_luminosidade >= 50) {
                                             document.getElementById("status-luminosidade").innerText = 'Claro';
                                         }
                                     </script>
