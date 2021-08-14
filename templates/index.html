@@ -25,8 +25,10 @@
             <div class="container">
                 <h3>Como funciona?</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna sed sed risus hendrerit. Id viverra amet, ultrices tellus nunc. Bibendum tempor commodo dictumst pretium, nunc, enim, laoreet. Egestas sed odio velit volutpat. Viverra nibh tristique purus adipiscing. Dictum tellus, in ut mauris. Massa convallis vulputate tellus ut arcu dictum. Aenean mi mauris purus malesuada massa. Eu elit, ac urna, bibendum sagittis ultricies id.
-                    Consequat aenean at tincidunt nulla id lacus, vitae. A, fermentum enim faucibus metus nibh varius. Aliquam velit condimentum ultricies neque enim cursus magna. Tempor, amet consequat neque dignissim. Nunc ullamcorper vulputate blandit odio aliquet sit. Egestas id rhoncus in risus malesuada lacinia porta. Arcu fringilla praesent ultrices fames lectus justo ac at. Consectetur tempor, vitae lorem pretium, imperdiet purus justo 
+                    A horta comunitária orgânica Dandara, construída no centro do empreendimento Dandara do MTST, é um projeto coletivo do condomínio para o estímulo à alimentação saudável e à construção coletiva. Os militantes que conquistaram suas moradias por meio da luta têm acesso a vegetais da mais alta qualidade que, depois de colhidos, são distribuídos por preços simbólicos para a comunidade local.
+                </p>
+                <p>
+                    Como projeto de conclusão do curso de Introdução à programação do Núcleo de Tecnologia do MTST, os estudantes se responsabilizaram por criar um sistema para automatizar a gestão de saúde da horta. Com componentes de última geração e uma interface web, os moradores do Dandara conseguem medir a temperatura e a umidade do ar, a luminosidade e a umidade do solo e garantir que os vegetais estejam sempre fresquinhos e no melhor estado para consumo.
                 </p>
             
                 <div class="painel">
@@ -66,15 +68,29 @@
                                    
                                     <div class="col">
                                         <h4>Luminosidade</h4>
-                                        <p>Claro</p>
+                                        <p id="status-luminosidade">Escuro</p>
                                         <ul class="nivel nivel-luminosidade">
-                                            <li><div class="luz active"></div></li>
-                                            <li><div class="luz active"></div></li>
-                                            <li><div class="luz active"></div></li>
-                                            <li><div class="luz active"></div></li>
-                                            <li><div class="luz"></div></li>
+                                            <li><div class="luz" id="luminosidade1"></div></li>
+                                            <li><div class="luz" id="luminosidade2"></div></li>
+                                            <li><div class="luz" id="luminosidade3"></div></li>
+                                            <li><div class="luz" id="luminosidade4"></div></li>
+                                            <li><div class="luz" id="luminosidade5"></div></li>
                                         </ul>
                                     </div>
+
+                                    <script>
+                                        var nivel_luminosidade = 40; /* Trocar pela variável*/
+                                        for (var i = 1; i <= 5; i++) {
+                                            var idElement = 'luminosidade'+i;
+                                            if (nivel_luminosidade >= i*20){
+                                                elemento = document.getElementById(idElement);
+                                                elemento.classList.add('active');
+                                            }
+                                        }
+                                        if (umidade_do_ar >= 50) {
+                                            document.getElementById("status-luminosidade").innerText = 'Claro';
+                                        }
+                                    </script>
 
                                 </div>
                                 <div class="row">
@@ -92,7 +108,7 @@
                                     </div>
 
                                     <script>
-                                        var umidade_do_ar = 25;
+                                        var umidade_do_ar = 25; /* Trocar pela variável*/
                                         for (var i = 1; i <= 5; i++) {
                                             var idElement = 'umidade-ar'+i;
                                             if (umidade_do_ar >= i*20){

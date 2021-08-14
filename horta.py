@@ -3,6 +3,8 @@ import requests
 from time import sleep
 
 app = Flask(__name__, template_folder='./templates')
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
 
 @app.route('/')
 def horta():
@@ -13,3 +15,4 @@ def horta():
     return render_template('/index.html', umidade_do_solo=u_solo, temperatura_do_ar= round(float(t_ar)), perc_temperatura=float(t_ar)*2, umidade_do_ar=u_ar)
 
 app.run()
+
