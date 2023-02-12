@@ -13,7 +13,7 @@ inquirer.registerPrompt('directory', require('inquirer-directory'));
 export const enum ComponentProptNames {
   componentName = 'componentName',
   path = 'path',
-  wantMemo = 'wantMemo',
+  wantReactQuery = 'wantReactQuery',
   wantStyledComponents = 'wantStyledComponents',
   wantTranslations = 'wantTranslations',
   wantLoadable = 'wantLoadable',
@@ -35,13 +35,8 @@ export const componentGenerator: PlopGeneratorConfig = {
       name: ComponentProptNames.path,
       message: 'Where do you want it to be created?',
       basePath: `${baseGeneratorPath}`,
+      default: 'component'
     } as any,
-    {
-      type: 'confirm',
-      name: ComponentProptNames.wantMemo,
-      default: false,
-      message: 'Do you want to wrap your component in React.memo?',
-    },
     {
       type: 'confirm',
       name: ComponentProptNames.wantStyledComponents,
@@ -60,6 +55,12 @@ export const componentGenerator: PlopGeneratorConfig = {
       name: ComponentProptNames.wantLoadable,
       default: false,
       message: 'Do you want to load the component asynchronously?',
+    },
+    {
+      type: 'confirm',
+      name: ComponentProptNames.wantReactQuery,
+      default: false,
+      message: 'Do you want to use React-Query?',
     },
     {
       type: 'confirm',
@@ -112,6 +113,15 @@ export const componentGenerator: PlopGeneratorConfig = {
         abortOnFail: true,
       });
     }
+
+    // if (answers.wantReactQuery) {
+    //   actions.push({
+    //     type: 'add',
+    //     path: `${componentPath}/react-query.ts`,
+    //     templateFile: './component/react-query.ts.hbs',
+    //     abortOnFail: true,
+    //   });
+    // }
 
     actions.push({
       type: 'prettify',

@@ -8,7 +8,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
     encodeSpecialCharacters={true}
     htmlAttributes={
       Object {
-        "lang": "en-US",
+        "lang": undefined,
       }
     }
     prioritizeSeoTags={false}
@@ -21,13 +21,18 @@ exports[`<App /> should render and match the snapshot 1`] = `
   </Helmet>
   <Routes>
     <Route
-      element={<Unknown />}
-      path="/"
+      element={<LoginPage />}
+      path="/login"
     />
     <Route
-      element={<Unknown />}
-      path="*"
-    />
+      element={<PrivateRoute />}
+      path="/"
+    >
+      <Route
+        element={<HomePage />}
+        path="/"
+      />
+    </Route>
   </Routes>
   <Memo(l) />
 </BrowserRouter>

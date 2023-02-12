@@ -1,3 +1,4 @@
-import { RootState } from './RootState';
+import * as IUsuario from './Usuario';
+import * as ILogin from './Login';
 
-export type { RootState };
+export type { IUsuario, ILogin };

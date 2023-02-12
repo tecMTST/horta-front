@@ -3,10 +3,14 @@
 * {{ properCase componentName }}
 *
 */
-{{#if wantMemo}}
-import React, { memo } from 'react';
-{{else}}
 import * as React from 'react';
+{{#if wantReactQuery}}
+import {
+  useQuery,
+  useQueryClient,
+  QueryClient,
+  QueryClientProviderProps,
+} from '@tanstack/react-query';
 {{/if}}
 {{#if wantStyledComponents}}
 import styled from 'styled-components/macro';
@@ -18,14 +22,14 @@ import { messages } from './messages';
 
 interface Props {}
 
-{{#if wantMemo}}
-export const {{ properCase componentName }} = memo((props: Props) => {
-{{else}}
 export function {{ properCase componentName }}(props: Props) {
 {{/if}}
   {{#if wantTranslations}}
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
+  {{/if}}
+  {{#if wantReactQuery}}
+  const { status, data, error, isFetching } = use{{ properCase componentName }}();
   {{/if}}
 
   return (
@@ -45,11 +49,15 @@ export function {{ properCase componentName }}(props: Props) {
   {{/if}}
   );
 
-{{#if wantMemo}}
-});
-{{else}}
 };
-{{/if}}
+
+function use{{ properCase componentName }}(prop) {
+  return useQuery({
+    queryKey: ["{{ lowerCase componentName }}", prop],
+    queryFn: () => {},
+    enabled: !!prop,
+  })
+}
 
 {{#if wantStyledComponents}}
 const Div = styled.div``;

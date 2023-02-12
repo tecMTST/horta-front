@@ -10,49 +10,48 @@ import 'react-app-polyfill/stable';
 
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import FontFaceObserver from 'fontfaceobserver';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { CircularProgress } from '@mui/material';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 
+// Import root app
 import { App } from 'app';
 
 import { HelmetProvider } from 'react-helmet-async';
-
-import { configureAppStore } from 'store/configureStore';
-
-import { ThemeProvider } from 'styles/theme/ThemeProvider';
 
 import reportWebVitals from 'reportWebVitals';
 
 // Initialize languages
 import './locales/i18n';
+import { ThemeProvider } from 'styles/theme/ThemeProvider';
+import { AuthLoader } from 'services/Authentication';
+import { LoginPage } from 'app/pages/LoginPage/Loadable';
 
-// Observe loading of Inter (to remove 'Inter', remove the <link> tag in
-// the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Inter', {});
+const queryClient = new QueryClient();
 
-// When Inter is loaded, add a font-family using Inter to the body
-openSansObserver.load().then(() => {
-  document.body.classList.add('fontLoaded');
-});
-
-const store = configureAppStore();
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
 root.render(
-  <Provider store={store}>
+  <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <HelmetProvider>
         <React.StrictMode>
-          <App />
+          <AuthLoader
+            renderLoading={() => <CircularProgress />}
+            renderUnauthenticated={() => <LoginPage />}
+          >
+            <App />
+          </AuthLoader>
+          <ReactQueryDevtools initialIsOpen={true} />
         </React.StrictMode>
       </HelmetProvider>
     </ThemeProvider>
-  </Provider>,
+  </QueryClientProvider>,
 );
 
 // Hot reloadable translation json files

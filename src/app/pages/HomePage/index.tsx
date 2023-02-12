@@ -1,25 +1,30 @@
+import CircularProgress from '@mui/material/CircularProgress';
+import { Box } from '@mui/system';
+import { HortaCard, useHortas } from 'app/components/Horta';
+import { LogoutButton } from 'app/components/Logout';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { NavBar } from 'app/components/NavBar';
-import { Masthead } from './Masthead';
-import { Features } from './Features';
-import { PageWrapper } from 'app/components/PageWrapper';
+import { useUser } from 'services/Authentication';
+import { Usuario } from 'types/Usuario';
 
 export function HomePage() {
+  const { data: usuario } = useUser();
+  const { data: hortas, isFetching } = useHortas();
   return (
     <>
       <Helmet>
-        <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React Boilerplate application homepage"
-        />
+        <title>NT - Horta Automatizada</title>
+        <meta name="description" content="NT - Horta Automatizada" />
       </Helmet>
-      <NavBar />
-      <PageWrapper>
-        <Masthead />
-        <Features />
-      </PageWrapper>
+      <span>Olá {(usuario as Usuario).name}</span>
+      <LogoutButton />
+      <Box>
+        {isFetching ? (
+          <CircularProgress />
+        ) : (
+          hortas?.map(horta => <HortaCard horta={horta} />)
+        )}
+      </Box>
     </>
   );
 }

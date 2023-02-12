@@ -1,15 +1,38 @@
+import { useQuery } from '@tanstack/react-query';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider as OriginalThemeProvider } from 'styled-components';
-import { useSelector } from 'react-redux';
-import { useThemeSlice } from './slice';
-import { selectTheme } from './slice/selectors';
+import { Theme, themes } from './themes';
+import { getThemeFromStorage, saveTheme } from './utils';
 
 export const ThemeProvider = (props: { children: React.ReactChild }) => {
-  useThemeSlice();
+  const [currentTheme, setCurrentTheme] = useState<Theme>(themes.dark);
+  const useThemeProvider = () => {
+    return useQuery({
+      queryKey: ['ThemeProvider'],
+      queryFn: () => {
+        const theme = getThemeFromStorage();
+        if (theme === null) {
+          saveTheme('dark');
+          return 'dark';
+        }
+        return theme;
+      },
+    });
+  };
+  const { status, data, error, isFetching } = useThemeProvider();
+  useEffect(() => {
+    if (!isFetching) {
+      if (status === 'success') {
+        setCurrentTheme(themes[data]);
+      } else if (error !== null) {
+        alert('ERROR');
+      }
+    }
+  }, [status, isFetching, data, error]);
 
-  const theme = useSelector(selectTheme);
   return (
-    <OriginalThemeProvider theme={theme}>
+    <OriginalThemeProvider theme={currentTheme}>
       {React.Children.only(props.children)}
     </OriginalThemeProvider>
   );
