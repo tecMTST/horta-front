@@ -12,25 +12,33 @@ import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Container, styled } from '@mui/material';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';
 
-// Import root app
 import { App } from 'app';
 
 import { HelmetProvider } from 'react-helmet-async';
 
 import reportWebVitals from 'reportWebVitals';
 
-// Initialize languages
 import './locales/i18n';
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
 import { AuthLoader } from 'services/Authentication';
 import { LoginPage } from 'app/pages/LoginPage/Loadable';
+import { defaultQuery } from 'api/client';
+import { Layout } from 'app/pages/layout';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      queryFn: async ({ queryKey: [url, variables] }) => {
+        return defaultQuery({ queryKey: { url, variables } });
+      },
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -41,13 +49,15 @@ root.render(
     <ThemeProvider>
       <HelmetProvider>
         <React.StrictMode>
-          <AuthLoader
-            renderLoading={() => <CircularProgress />}
-            renderUnauthenticated={() => <LoginPage />}
-          >
-            <App />
-          </AuthLoader>
-          <ReactQueryDevtools initialIsOpen={true} />
+          <Layout>
+            <AuthLoader
+              renderLoading={() => <CircularProgress />}
+              renderUnauthenticated={() => <LoginPage />}
+            >
+              <App />
+            </AuthLoader>
+          </Layout>
+          <ReactQueryDevtools initialIsOpen={false} />
         </React.StrictMode>
       </HelmetProvider>
     </ThemeProvider>

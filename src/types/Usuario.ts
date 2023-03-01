@@ -1,10 +1,9 @@
 import { object, string, TypeOf } from 'zod';
 
-const UsuarioSchema = object({
-  email: string().email(),
+const usuarioSchema = object({
+  email: string().email().optional(),
   name: string(),
   token: string(),
-  details: object({}).optional(),
 });
 
-export type Usuario = TypeOf<typeof UsuarioSchema>;
+export type Usuario = TypeOf<typeof usuarioSchema>;

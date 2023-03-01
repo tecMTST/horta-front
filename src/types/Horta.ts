@@ -1,10 +1,10 @@
-import { array, object, string, TypeOf } from 'zod';
+import { array, object, string, number, TypeOf } from 'zod';
 
-const HortaSchema = object({
-  nome: string(),
-  descricao: string(),
-  endereco: string(),
-  canteiros: array(object({})),
+const hortaSchema = object({
+  name: string(),
+  id: number(),
+  address: string(),
+  lots: array(object({ id: number(), name: string() })),
 });
 
-export type Horta = TypeOf<typeof HortaSchema>;
+export type Horta = TypeOf<typeof hortaSchema>;

@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import { IconButton, InputAdornment, OutlinedInput } from '@mui/material';
+import { IconButton, InputAdornment, Input } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { styled } from '@mui/material/styles';
 import { useFormContext } from 'react-hook-form';
 
 export interface PasswordFieldProps {}
@@ -19,23 +20,32 @@ export function PasswordField(props: PasswordFieldProps) {
 
   const { register } = useFormContext();
   return (
-    <OutlinedInput
+    <Input
       id="outlined-adornment-password"
       type={showPassword ? 'text' : 'password'}
+      color={'secondary'}
       endAdornment={
-        <InputAdornment position="end">
-          <IconButton
+        <Pass position="end">
+          <PasswordToggle
             aria-label="toggle password visibility"
             onClick={handleClickShowPassword}
             onMouseDown={handleMouseDownPassword}
-            edge="end"
+            color={'secondary'}
           >
             {showPassword ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>
+          </PasswordToggle>
+        </Pass>
       }
       {...props}
       {...register('password')}
     />
   );
 }
+
+const PasswordToggle = styled(IconButton)`
+  color: '#E6EAEB';
+`;
+
+const Pass = styled(InputAdornment)`
+  color: '#E6EAEB';
+`;

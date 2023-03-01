@@ -1,31 +1,81 @@
-import axios from 'axios';
-import { Horta } from 'types/Horta';
+import axios, { AxiosRequestConfig, isAxiosError } from 'axios';
+import { storage } from 'services/utils';
 import { LoginInput } from 'types/Login';
 import { Usuario } from 'types/Usuario';
-import { BackendPaths } from './paths';
-import { mockAll } from './mocks';
+import { BackendEntities } from './utils';
 
-mockAll(axios);
-export const loginUser = async (
-  login: LoginInput,
-): Promise<{ token: string }> => {
-  const res = await axios.get<string>(BackendPaths.LOGIN, {
-    params: { ...login },
-  });
-  return { token: res.data };
-};
+export interface QueryProps {
+  url: string;
+  token: string;
+}
 
-export const getUserProfile = async (token: string): Promise<Usuario> => {
-  const res = await axios.get<Usuario>(BackendPaths.USER, {
-    headers: { Authorization: token },
-  });
-  return res.data as Usuario;
-};
+export interface MutationProps {
+  url: string;
+  token: string;
+  variables: any;
+}
 
-export const getHortas = async (token: string): Promise<Array<Horta>> => {
-  const res = await axios.get<Array<Horta>>(BackendPaths.HORTAS, {
-    headers: { Authorization: token },
-  });
-  var hortas = res.data as Array<Horta>;
-  return hortas;
-};
+const BASE_URL = 'https://api-horta.herokuapp.com'; //process.env.REACT_APP_BACKEND_PATH;
+
+export async function defaultQuery<T>({ queryKey }): Promise<T | null> {
+  const { url } = queryKey;
+  const user = storage.getUser() as Usuario;
+  if (typeof url === 'string') {
+    try {
+      let options = {
+        headers: { Authorization: `Bearer ${user.token}` },
+      } as AxiosRequestConfig;
+
+      const { data } = await axios.get<T>(
+        `${BASE_URL}/${url.toLowerCase()}`,
+        options,
+      );
+
+      return data;
+    } catch {
+      console.log('dq: catch');
+      return null;
+    }
+  }
+  throw new Error('Invalid QueryKey');
+}
+
+export async function defaultMutation<T>({ mutationKey }): Promise<T> {
+  const [url, variables] = mutationKey;
+  const user = storage.getUser() as Usuario;
+  if (typeof url === 'string') {
+    let options = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    } as AxiosRequestConfig;
+    if (variables !== undefined && variables !== null) {
+      options.params = JSON.stringify(variables);
+    }
+
+    const { data } = await axios.post<T>(
+      `${BASE_URL}/${url.toLowerCase()}`,
+      options,
+    );
+
+    return data;
+  }
+  throw new Error('Invalid QueryKey');
+}
+
+export async function login(
+  credentials: LoginInput,
+): Promise<{ data: string }> {
+  try {
+    const { data } = await axios.post<{ data: string }>(
+      `${BASE_URL}/${BackendEntities.LOGIN}`,
+      credentials,
+    );
+    return data;
+  } catch (ex) {
+    if (isAxiosError(ex)) {
+      console.log(ex.toJSON());
+      return Promise.reject(ex.toJSON());
+    }
+    console.log(ex);
+    return Promise.reject(ex);
+  }
+}

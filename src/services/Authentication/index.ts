@@ -1,10 +1,8 @@
 import { configureAuth } from 'react-query-auth';
-import { getUserProfile } from '../../api/client';
 import { storage } from '../utils';
 import { LoginInput } from 'types/Login';
 import { Usuario } from 'types/Usuario';
-import { loginUser } from 'api/client';
-import { isError } from '@tanstack/react-query';
+import { login } from 'api/client';
 
 export type LoginCredentials = {
   email: string;
@@ -17,40 +15,36 @@ export type RegisterCredentials = {
   password: string;
 };
 
-async function handleUserResponse(data: Usuario) {
-  const { token } = data;
-  if (token && token.length > 0) {
-    storage.setToken(token);
-    return data as Usuario;
-  }
-  console.log('err');
-  return Promise.reject(data);
-}
-
 async function userFn() {
-  const user = await getUserProfile(storage.getToken());
-  return user ?? null;
+  const user = storage.getUser() as Usuario;
+  if (user === null || user.token === undefined || user.token.length <= 0) {
+    return null;
+  }
+  return user;
 }
 
 async function loginFn(data: LoginInput) {
-  const response = await loginUser(data);
-  if (isError(response)) {
-    return Promise.reject(response);
-  } else {
-    const { token } = response as { token: string };
-    const user = await getUserProfile(token);
-    const authenticatedUser = await handleUserResponse(user as Usuario);
-    return authenticatedUser;
+  const response = await login(data);
+
+  if (response.data.length > 0) {
+    const token = response.data;
+    let user = { email: data.email, name: '' } as Usuario;
+
+    if (token && token.length > 0) {
+      user.token = token;
+      storage.setUser(user);
+      return user;
+    }
   }
 }
 
 async function registerFn(data: LoginInput) {
   //TODO
-  return null;
+  return {} as Usuario;
 }
 
 async function logoutFn() {
-  storage.clearToken();
+  storage.clearUser();
   return null;
 }
 

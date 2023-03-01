@@ -9,12 +9,12 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { GlobalStyle } from 'styles/global-styles';
 import { useTranslation } from 'react-i18next';
 
 import { HomePage } from './pages/HomePage';
-import { LoginPage } from './pages/LoginPage';
-
+import { HortaPage } from './components/Horta';
+import { ROUTES } from 'utils/routes';
+import { ErrorPage } from './pages/ErrorPage';
 export function App() {
   const { i18n } = useTranslation();
 
@@ -28,10 +28,10 @@ export function App() {
         <meta name="description" content="NT - Horta automatizada" />
       </Helmet>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path={`/${ROUTES.HORTA}/:id`} element={<HortaPage />} />
+        <Route path={`*`} element={<ErrorPage />} />
       </Routes>
-      <GlobalStyle />
     </BrowserRouter>
   );
 }

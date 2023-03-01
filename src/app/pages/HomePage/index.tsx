@@ -1,30 +1,21 @@
-import CircularProgress from '@mui/material/CircularProgress';
-import { Box } from '@mui/system';
-import { HortaCard, useHortas } from 'app/components/Horta';
-import { LogoutButton } from 'app/components/Logout';
+import { Container } from '@mui/system';
+import { Hortas } from 'app/components/Horta';
 import * as React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { useUser } from 'services/Authentication';
-import { Usuario } from 'types/Usuario';
+import { styled } from '@mui/material/styles';
+import { Grid } from '@mui/material';
 
 export function HomePage() {
-  const { data: usuario } = useUser();
-  const { data: hortas, isFetching } = useHortas();
   return (
-    <>
-      <Helmet>
-        <title>NT - Horta Automatizada</title>
-        <meta name="description" content="NT - Horta Automatizada" />
-      </Helmet>
-      <span>Olá {(usuario as Usuario).name}</span>
-      <LogoutButton />
-      <Box>
-        {isFetching ? (
-          <CircularProgress />
-        ) : (
-          hortas?.map(horta => <HortaCard horta={horta} />)
-        )}
-      </Box>
-    </>
+    <Grid container gridAutoRows={2}>
+      <h1>Hortas</h1>
+      <Conteudo>
+        <Hortas />
+      </Conteudo>
+    </Grid>
   );
 }
+const Conteudo = styled(Container)`
+  display: grid;
+  grid-auto-columns: auto;
+  justify-content: center;
+`;

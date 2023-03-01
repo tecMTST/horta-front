@@ -1,22 +1,59 @@
-const lightTheme = {
-  primary: 'rgba(215,113,88,1)',
-  text: 'rgba(58,52,51,1)',
-  textSecondary: 'rgba(58,52,51,0.7)',
-  background: 'rgba(255,255,255,1)',
-  backgroundVariant: 'rgba(251,249,249,1)',
-  border: 'rgba(58,52,51,0.12)',
-  borderLight: 'rgba(58,52,51,0.05)',
-};
+import { createTheme } from '@mui/material';
 
-const darkTheme: Theme = {
-  primary: 'rgba(220,120,95,1)',
-  text: 'rgba(241,233,231,1)',
-  textSecondary: 'rgba(241,233,231,0.6)',
-  background: 'rgba(0,0,0,1)',
-  backgroundVariant: 'rgba(28,26,26,1)',
-  border: 'rgba(241,233,231,0.15)',
-  borderLight: 'rgba(241,233,231,0.05)',
-};
+const lightTheme = createTheme({
+  palette: {
+    background: {
+      default: 'rgba(255,255,255,1)',
+      paper: 'rgba(251,249,249,1)',
+    },
+    primary: {
+      main: 'rgba(215,113,88,1)',
+    },
+    text: { primary: 'rgba(58,52,51,1)', secondary: 'rgba(58,52,51,0.7)' },
+  },
+  typography: {
+    fontFamily: 'Ubuntu',
+  },
+});
+
+const darkTheme = createTheme({
+  palette: {
+    background: {
+      default: '#100D1A',
+      paper: '#1F1A38',
+    },
+    error: { main: '#FF9736' },
+    primary: {
+      main: '#EE3137',
+      dark: '#671416',
+    },
+    secondary: {
+      main: '#456990',
+      dark: '#1F344B',
+      light: '#456990',
+    },
+    text: {
+      primary: '#E6EAEB',
+      secondary: '#E6EAEB',
+    },
+  },
+  typography: {
+    fontFamily: 'Ubuntu',
+    fontWeightRegular: 400,
+    fontSize: 16,
+    h1: { color: '#E6EAEB' },
+  },
+  shape: { borderRadius: 5 },
+  components: {
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#1F1A38',
+        },
+      },
+    },
+  },
+});
 
 export type Theme = typeof lightTheme;
 

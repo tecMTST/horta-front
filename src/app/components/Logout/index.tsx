@@ -1,19 +1,20 @@
 import * as React from 'react';
 
-import { Button } from '@mui/material';
 import { useLogout } from 'services/Authentication';
+import { Botao } from '../BotaoNT';
 
 export function LogoutButton() {
   const logout = useLogout();
   return (
-    <Button
-      onClick={() => {
-        logout.mutate(null);
+    <Botao
+      onClick={e => {
+        e.preventDefault();
+        logout.mutate({});
       }}
-      variant={'contained'}
-      defaultValue={'Logout'}
+      variant={'outlined'}
+      size={'small'}
     >
-      Logout
-    </Button>
+      Sair
+    </Botao>
   );
 }

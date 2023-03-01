@@ -1,8 +1,10 @@
+import { Usuario } from 'types/Usuario';
+
 function clearLocal(key: string) {
-  window.localStorage.removeItem(key);
+  window.localStorage && window.localStorage.removeItem(key);
 }
 
-function saveLocal(key: string, value: string) {
+function saveLocal(key: string, value: any) {
   window.localStorage && localStorage.setItem(key, value);
 }
 
@@ -13,7 +15,14 @@ function getFromLocal(key: string): string | null {
 }
 
 export const storage = {
-  getToken: () => JSON.parse(getFromLocal('token') || 'null'),
-  setToken: (token: string) => saveLocal('token', JSON.stringify(token)),
-  clearToken: () => clearLocal('token'),
+  getUser: () =>
+    JSON.parse(getFromLocal('usr-data') || 'null', (_, value) => {
+      return value as Usuario;
+    }),
+  setUser: (user: Usuario) => {
+    saveLocal('usr-data', JSON.stringify(user));
+  },
+  clearUser: () => {
+    clearLocal('usr-data');
+  },
 };

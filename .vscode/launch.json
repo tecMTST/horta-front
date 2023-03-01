@@ -7,6 +7,7 @@
       "type": "msedge",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}/src",
+      "runtimeArgs": ["--disable-web-security"],
       "sourceMapPathOverrides": {
         "webpack:///src/*": "${webRoot}/*"
       }
@@ -17,6 +18,7 @@
       "request": "launch",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}/src",
+      "runtimeArgs": ["-disable-web-security"],
       "sourceMapPathOverrides": {
         "webpack:///src/*": "${webRoot}/*"
       }

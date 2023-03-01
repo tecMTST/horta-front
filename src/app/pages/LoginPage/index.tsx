@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import React from 'react';
 import { SubmitHandler, FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, TextField } from '@mui/material';
-import styled from 'styled-components';
+import { TextField, Container, InputLabel } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 import { PasswordField } from 'app/components/Senha';
 import { LoginInput, loginSchema } from 'types/Login';
 import { useLogin } from 'services/Authentication';
+import { Navigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
+import { Botao } from 'app/components/BotaoNT';
 
 export function LoginPage() {
+  let { invalidateQueries } = useQueryClient();
   const login = useLogin();
 
   const methods = useForm<LoginInput>({
@@ -19,53 +22,73 @@ export function LoginPage() {
   });
 
   const {
-    reset,
     handleSubmit,
     register,
     formState: { isSubmitSuccessful, isSubmitting },
   } = methods;
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful, reset]);
+  const onSubmitHandler: SubmitHandler<LoginInput> = async (values, e) => {
+    e?.preventDefault();
 
-  const onSubmitHandler: SubmitHandler<LoginInput> = values => {
-    login.mutate(values);
+    login.mutate(values, {
+      onError: (error, variables) => {
+        console.log(error);
+        invalidateQueries({ queryKey: ['authenticated-user'] });
+      },
+    });
   };
 
+  if (isSubmitSuccessful && login.isSuccess) {
+    return <Navigate to="/" />;
+  }
+
   return (
-    <>
-      <Helmet>
-        <title>Horta Automatizada - Login</title>
-        <meta name="description" content="Login" />
-      </Helmet>
-      <Wrapper>
-        <FormProvider {...methods}>
-          <Form onSubmit={handleSubmit(onSubmitHandler)}>
-            <TextField label="E-mail" type="email" {...register('email')} />
-            <PasswordField />
-            <Button type="submit" disabled={isSubmitting}>
-              Login
-            </Button>
-          </Form>
-        </FormProvider>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <FormProvider {...methods}>
+        <Form onSubmit={handleSubmit(onSubmitHandler)}>
+          <InputLabel>Email</InputLabel>
+          <TextField
+            type="email"
+            color={'secondary'}
+            variant="standard"
+            {...register('email')}
+          />
+          <InputLabel>Senha</InputLabel>
+          <PasswordField />
+          <ButtonWrapper>
+            <Botao tipo="azul" disabled>
+              Registrar
+            </Botao>
+            <Botao
+              type="submit"
+              tipo="vermelho"
+              disabled={isSubmitting || login.isLoading}
+            >
+              Entrar
+            </Botao>
+          </ButtonWrapper>
+        </Form>
+      </FormProvider>
+    </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled(Container)`
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: row;
-  min-height: 320px;
+  flex-direction: column;
 `;
 
-const Form = styled.form`
-  display: inline-grid;
+const Form = styled('form')`
   justify-content: center;
+  flex-direction: column;
+  display: flex;
+`;
+
+const ButtonWrapper = styled('div')`
+  align-self: center;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  margin-top: 15px;
 `;
