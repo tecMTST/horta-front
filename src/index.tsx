@@ -12,7 +12,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { CircularProgress, Container, styled } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 // Use consistent styling
 import 'sanitize.css/sanitize.css';

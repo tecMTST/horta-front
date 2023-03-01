@@ -31,8 +31,7 @@ export function LoginPage() {
     e?.preventDefault();
 
     login.mutate(values, {
-      onError: (error, variables) => {
-        console.log(error);
+      onError: () => {
         invalidateQueries({ queryKey: ['authenticated-user'] });
       },
     });
