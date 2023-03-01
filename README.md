@@ -1,50 +1,70 @@
-# horta
+<h1 align="center">Horta Comunitária</h1>
 
-  
+<div align="center" >Criado usando <strong>create-react-app</strong> com o template <strong>cra-template-rb</strong>, com algumas alterações para simplificar o desenvolvimento.
+<br/>
+<br/>
+<p align="center" >Tech stack do projeto inclui: </p>
+<p><strong>NodeJS, React, TypeScript, React-Query, MaterialUI, Jest</strong></p>
+</div>
 
-### O projeto:
- 
-Esta é a aplicação Frontend para a Horta Comunitária do MTST.
+---
 
+## Pré-Requisitos
 
-## Iniciando
+<div>
+  <li>Instalar Node.JS</li>
+  <li>Clonar o repositorio (branch: <strong style="color:red;">ini-cra-rb</strong>)</li>
+  <li>Abrir a pasta do repositório no visual studio code</li>
+  <li>No terminal, rodar <code>yarn install</code></li>
+</div>
+<br/>
 
-Para iniciar é necessario que você tenha o Nodejs com Npm instalados. [Download aqui](https://nodejs.org/pt-br/download/)
-  
-  * Baixe o repositório em seu local: `git clone ...`
-  * Acesse a pasta do repositório: `cd horta`
-  * Instale as depêndencias: `npm i` ou `npm install`
-  * Para iniciar o servidor local: `npm run dev`
+## Como rodar o projeto localmente
 
-ps: o projeto usa o npm como package manager. Não instalar usando yarn
+<div>
+  <li>No terminal, rodar <code>yarn start</code></li>
+  <li>Abrir no seu navegador http://localhost:3000</li>
+</div>
+<br/>
 
+> Devido ao CORS habilitado no servidor, você precisa inicializar seu navegador (Chrome) com a flag _-disable-web-security_ > <br/>
+> O debug do VS Code com chrome já está configurado com a flag.
+> <br/>
 
-## Scripts
+## Como adicionar uma nova página
 
-``` bash
+<div>
+  <li>Adicionar um novo sub-endereço em <code>./src/utils/routes.ts</code></li>
+  <li>Adicionar uma nova rota em <code>./src/app/index.tsx</code></li>
+  <li>Adicionar uma nova pasta em <code>./src/app/pages/</code> seguindo o formato estabelecido</li>
+</div>
+<br/>
 
-# instalar dependências
+## Como criar um componente visual
 
-npm install
-  
-# iniciar o servidor local com hot reload na porta 8080
+<div>
+  <li>Adicionar uma nova pasta em <code>./src/app/components/</code> seguindo o formato estabelecido</li>
+  <li>Utilize o método de styled-components para modificações, para isso:
+  <ul>No topo do arquivo <code>./index.tsx</code> importe <code>import { styled } from '@mui/material'</code></ul>
+</div>
+<br/>
 
-npm run dev
-  
-# criar versão para produção
+## Como criar um componente de dados
 
-npm run build
-  
-# rodar versão de produção localmente (só funciona após o build)
+<br/>
 
-npm run serve
+## Como rodar os testes
 
-```
+<br/>
 
-  ## Arquitetura
-Este projeto usa uma stack moderna.
-Abaixo listamos cada ferramenta utilizada e a motivação.
-  
-  `Preact`: Um framework com praticamente a mesma sintaxe e funcionalidades que o React. A vantagem é que ele exclui algumas coisas nativas ao React (como eventos sinteticos). É extremamente leve, pesando apenas 3kb no bundle final. [Veja mais sobre o Preact aqui](https://preactjs.com/)
+## Processo de deploy
 
-`styled-components`: O styled-components é uma ferramenta de CSS-in-JS, que permite escrever os estilos dentro de arquivos javascript. Há algumas vantagens nessa abordagem, entre elas uma melhor arquitetura de código, performance e criação de temas.
+<br/>
+
+## Perguntas & Problemas Frequentes
+
+<br/>
+
+## License
+
+MIT
